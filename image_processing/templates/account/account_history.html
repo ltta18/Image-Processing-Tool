@@ -1,0 +1,23 @@
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{category}}" style="width:90%">
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+{% for image in images %}
+    <div style="margin-left: 20px;">
+        <img class="account-img" style="margin-bottom: 0" src="{{ url_for('static', filename='user_images/' + image.filename) }}">
+        <a href="{{ url_for('static', filename='user_images/' + image.filename) }}" download>
+            <button class="btn btn-secondary" style="width:100px;">Download</button>
+        </a>
+        <form method="POST" action="{{ url_for('delete_image', image_id=image.id) }}" style="display:inline">
+            <input class="btn btn-danger" style="width:100px;" type="submit" value="Delete">
+        </form>
+        <br>
+        <small class="text-muted">{{ image.date_processed.strftime('%Y-%m-%d') }}</small>
+        <br><br>
+    </div>
+{% endfor %}

@@ -1,0 +1,60 @@
+img, canvas{
+    max-width:710px;
+  }
+
+  .image-container{
+    background-color: #f7f7f7;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .image-container {
+    margin-bottom: 1rem;
+    max-height: 497px;
+    min-height: 200px;
+  }
+  
+  @media (min-width: 768px) {
+    .image-container {
+      min-height: 497px;
+    }
+  }
+  
+  .image-container > img {
+    max-width: 100%;
+  }
+  .image-container > canvas {
+    max-width: 100%;
+  }
+
+  input[type=range] {
+    -webkit-appearance: none;
+    margin: 18px 0;
+    width: 100%;
+  }
+
+  input[type=range]::-webkit-slider-runnable-track {
+    height: 8.4px;
+    cursor: pointer;
+    animation-duration: 0.2s;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    background: #5f788a;
+    border-radius: 1.3px;
+    border: 0.2px solid #010101;
+  }
+  
+  input[type=range]::-webkit-slider-thumb {
+    box-shadow: 0.5px 0.5px 0.5px #000000, 0px 0px 0.5px #0d0d0d;
+    border: 1px solid #000000;
+    height: 30px;
+    width: 10px;
+    border-radius: 3px;
+    background: #ffffff;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -14px;
+  }
+
+  input[type=range] {
+    width: 80%;
+  }

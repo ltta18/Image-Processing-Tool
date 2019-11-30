@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='layout.css') }}">
+
+    <title>Image Processing Tool</title>
+</head>
+<body>
+  <header class="site-header">
+      <nav class="navbar navbar-nav navbar-expand-lg navbar-dark bg-steel fixed-top">
+          <div class="container">
+                  <a class="navbar-brand" href="{{ url_for('home') }}">IPT</a>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                      <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('about') }}">About<span class="sr-only">(current)</span></a>
+                      </li>
+                      {% if current_user.has_role('user') %}
+                        <div class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Tools<span class="caret"></span>
+                          </a>
+                          <ul class="dropdown-menu" id="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url_for('resize') }}">Resize images</a>
+                            <a class="dropdown-item" href="{{ url_for('crop') }}">Crop images</a>
+                          </ul>
+                        </div>
+                      {% endif %}
+                    </ul>
+                  </div>
+                  
+              <!-- Navbar Right Side -->
+              <div class="navbar-nav">
+                {% if not current_user.has_role('premium') %}
+                <a class="nav-item nav-link" href="{{ url_for('get_premium') }}">Premium</a> 
+                {% endif %}
+                {% if current_user.is_authenticated %}
+                  <a class="nav-item nav-link" href="{{ url_for('account') }}">{{ current_user.username }}</a>
+                  <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+                {% else %}
+                  <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
+                  <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
+                {% endif %}
+              </div> 
+          </div>
+          </div>
+      </nav>
+  </header>
+  <main role="main" class="container">
+      {% if not current_user.has_role('premium') or request.endpoint in ['about','done', 'error', 'admin.index'] %}
+      <div class="container">
+          <h1 class="display-4" style="text-align: center; font-size: 45px">{{ title }}</h1>
+      </div>
+      {% else %}
+      {% block title %}{% endblock title %}
+      {% endif %}
+
+      <br>
+      {% if (current_user.has_role('premium') and request.endpoint not in ['about', 'done','error', 'admin.index'])
+            or (request.endpoint in ['account', 'user_history']) %}
+        {% block body %}{% endblock body %}
+      {% else %}
+        <div class="jumbotron jumbotron-fluid">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{category}}" style="width: 90%; margin-left: 5%; margin-bottom: 20px">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+          
+          {% block content %}{% endblock content %}
+      {% endif %}
+    </div>
+  </main>
+
+  <footer>
+    <br>
+    <div>
+      <h6 class="footer"><i>© 2019 - Image Processing Tool</i></h6>
+    </div>
+  </footer>
+
+  <!-- script -->
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+      $('#inputGroupFile01').change(function() {
+      var i = $(this).prev('label').clone();
+      var file = $('#inputGroupFile01')[0].files[0].name;
+      $(this).prev('label').text(file);
+      });
+  </script>
+  <script>
+      $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip({delay: {'show':100, 'hide':2000}}); 
+      });
+  </script>
+
+  <script>
+    $("#navbarDropdown").click(function(){
+      var menu = $("#dropdown-menu");
+      menu.hasClass("show") ?
+        menu.removeClass("show")
+        :
+        menu.addClass("show")
+    });
+  </script>
+
+  <!-- crop scripts -->
+  
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <script src="https://fengyuanchen.github.io/shared/google-analytics.js"></script>
+  <script src="{{ url_for('static', filename='cropper.js') }}"></script>
+  <script src="{{ url_for('static', filename='crop.js') }}"></script>
+
+  <!-- brightness script -->
+  <script type="text/javascript" src="{{ url_for('static', filename='caman.full.min.js') }}"></script>
+</body>
+</html>

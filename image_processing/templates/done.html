@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+<h3 class="lead" style="text-align: center">Click the button to download.</h3>
+    <br>
+    <a href={{destination}} download>
+        <button id="download" type="button" class="btn btn-secondary" style="width: 10%; margin-left: 45%;"> Download</button> 
+    </a>
+    <br><br>
+    <a href="/">
+        <button type="button" class="btn btn-secondary" style="width: 10%; margin-left: 45%;"> Return</button>
+    </a> 
+{% endblock %}
+{% block body %}
+    <h3 class="lead" style="text-align: center">Click the button to download.</h3>
+    <br>
+    <a href={{destination}} download>
+        <button id="download" type="button" class="btn btn-secondary" style="width: 10%; margin-left: 45%;"> Download</button> 
+    </a>
+    <br><br>
+    <a href="/">
+        <button type="button" class="btn btn-secondary" style="width: 10%; margin-left: 45%;"> Return</button>
+    </a> 
+{% endblock body %}

@@ -1,0 +1,112 @@
+
+    <div style="width: 90%; margin-left: 5%; margin-bottom: 20px">
+        <div class="container" id="action">
+            <div class="row">
+                <!-- Canvas -->
+                <div class="col-md-9" style="text-align: center">
+                    <div class="image-container" style="display: inline-block">
+                        <canvas id="canvas"></canvas>
+                    </div>
+                </div>
+
+                <!-- Change Brightness -->
+                <div class="col-md-3" id="change-brightness">
+                    <label for="brightness">Brightness</label>
+                    <input type="range" id="brightnessInput" name="brightness" min="-100" max="100" step="1" oninput="brightnessOutput.value = brightnessInput.value">
+                    <output name="brightnessOutput" id="brightnessOutput">0</output>
+                    
+                    <label for="contrast">Contrast</label>
+                    <input type="range" id="contrastInput" name="contrast" min="-100" max="100" step="1" oninput="contrastOutput.value = contrastInput.value">
+                    <output name="contrastOutput" id="contrastOutput">0</output>
+
+                    <label for="exposure">Exposure</label>
+                    <input type="range" id="exposureInput" name="exposure" min="-100" max="100" step="1" oninput="exposureOutput.value = exposureInput.value">
+                    <output name="exposureOutput" id="exposureOutput">0</output>
+
+                    <label for="saturation">Saturation</label>
+                    <input type="range" id="saturationInput" name="saturation" min="-100" max="100" step="1" oninput="saturationOutput.value = saturationInput.value">
+                    <output name="saturationOutput" id="saturationOutput">0</output>
+
+                    <label for="vibrance">Vibrance</label>
+                    <input type="range" id="vibranceInput" name="vibrance" min="-100" max="100" step="1" oninput="vibranceOutput.value = vibranceInput.value">
+                    <output name="vibranceOutput" id="vibranceOutput">0</output>
+
+                    <label for="hue">Hue value</label>
+                    <input type="range" id="hueInput" name="hue" min="0" max="100" step="1" oninput="hueOutput.value = hueInput.value">
+                    <output name="hueOutput" id="hueOutput">50</output>
+                    <!-- Import Image -->
+                    <div class="input-group input-group-sm">
+                        <div class="custom-file">
+                            <label class="custom-file-label" for="inputGroupFile01" style="overflow: hidden">Choose file</label>
+                            <input type="file" class="custom-file-input" id="inputGroupFile01" name="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                        </div>
+                    </div>
+                    <br>
+                    <button class="btn btn-outline-secondary" id="download-btn">Download</button>
+                    <!-- <input type="file" id="filtered" name="filtered" style="display: none"> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='filter.css') }}">
+
+<script type="text/javascript">
+    var attributes = {
+        brightness: 0,
+        contrast: 0,
+        hue: 0,
+        exposure: 0,
+        saturation: 0,
+        vibrance: 0,
+    };
+
+    var changeAttribute = (attName, value) => {
+        Caman("#canvas", function () {
+            attributes[attName] = value;
+            this.revert();
+            this.brightness(attributes.brightness);
+            this.contrast(attributes.contrast);
+            this.exposure(attributes.exposure);
+            this.hue(attributes.hue);
+            this.saturation(attributes.saturation);
+            this.vibrance(attributes.vibrance);
+            this.render();
+        });
+        
+    }  
+
+    document.getElementById('brightnessInput').addEventListener("change", function() {
+        var number=document.getElementById('brightnessInput').value;
+        changeAttribute('brightness', number);
+        
+    });
+
+    document.getElementById('contrastInput').addEventListener("change", function() {
+        var number=document.getElementById('contrastInput').value;
+        changeAttribute('contrast', number)
+    });
+
+    document.getElementById('exposureInput').addEventListener("change", function() {
+        var number=document.getElementById('exposureInput').value;
+        changeAttribute('exposure', number);
+    });
+
+    document.getElementById('hueInput').addEventListener("change", function() {
+        var number=document.getElementById('hueInput').value;
+        changeAttribute('hue', number);
+    });
+
+    document.getElementById('saturationInput').addEventListener("change", function() {
+        var number=document.getElementById('saturationInput').value;
+        changeAttribute('saturation', number);
+    });
+
+    document.getElementById('vibranceInput').addEventListener("change", function() {
+        var number=document.getElementById('vibranceInput').value;
+        changeAttribute('vibrance', number);
+    });
+</script>
+
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='filter.js') }}"></script>

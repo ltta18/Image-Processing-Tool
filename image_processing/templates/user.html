@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}     
+    {% if request.endpoint == 'crop'%}
+        {% include '/function/crop.html' %}
+    {% endif %}
+
+    {% if request.endpoint == 'resize' %}
+        {% include '/function/resize.html' %}
+    {% endif %}
+
+    {% if request.endpoint == 'filter'%}
+        {% include '/function/filter.html' %}
+    {% endif %}
+    
+{% endblock content %}

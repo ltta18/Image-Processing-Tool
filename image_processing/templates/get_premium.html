@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section" style="width: 40%; margin-left: 7%; margin-bottom: 20px; border-radius: 15px; display: inline-block;">
+        <form method="POST" action="" >
+            <p style="margin: 0; font-size: 23px">Try Premium free for 30 days</p>
+            <p>Only 2$/month after. Cancel anytime</p>
+            <div>
+                <img src="{{ url_for('static', filename='card_image/visa-512.png') }}" alt="visa" height="20px" width="30px">
+                <img src="{{ url_for('static', filename='card_image/mastercard.png') }}" alt="mastercard" height="20px" width="30px">
+                <img src="{{ url_for('static', filename='card_image/discover.png') }}" alt="discover" height="20px" width="30px"> 
+                <img src="{{ url_for('static', filename='card_image/amex.png') }}" alt="amex" height="20px" width="30px"> 
+            </div>
+            <br>
+            <input class="btn btn-outline-info" type="submit" value="Go Premium" style="width:98%; margin-left: 1%; border-radius: 20px;">
+        </form>
+    <br>
+        <div class="border-top pt-3" style="width: 90%; margin-left: 6%;">
+            <small class="text-muted">
+                Open only to users who haven't already tried Premium.<a class="ml-2" href="">Terms apply.</a>
+            </small>
+        </div>
+    </div>
+    <div class="content-section" style="width: 40%; margin-left: 5%; margin-bottom: 20px; border-radius: 15px; display: inline-block;">
+            <form method="POST" action="" >
+                <p style="margin: 0; font-size: 23px">Get Premium from 0.5$</p>
+                <p>Try a day, week or month.</p>
+                <img src="{{ url_for('static', filename='card_image/paypal-512.png') }}" alt="paypal" height="20px" width="30px"> 
+                <br><br>
+                <input class="btn btn-outline-info" type="submit" value="Pay with Paypal" style="width:98%; margin-left: 1%; border-radius: 20px;">
+            </form>
+        <p style="margin: 17px"></p>
+        <br><br><br>
+        
+    </div>
+
+
+{% endblock content %}

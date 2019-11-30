@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block body %}
+    <div class='content-section' style="margin-bottom:0">
+        <div class='media'>
+            <img class="rounded-circle account-img" src="{{ image_file }}">
+            <div class="media-body">
+                <h2 class="account-heading">{{ current_user.username }}</h2>
+                <p class="text-secondary">{{ current_user.email }}</p>
+            </div>
+        </div>
+    </div>
+    <div id="inline">
+        <div style="background-color: #d8e5f3;">
+            <div class="btn-group-vertical btn-group-toggle" role="group" style=" height: 100%">
+                <a href="{{url_for('account') }}"><div class="btn btn-secondary left-15"><input type="radio" name="options" style="display: none">User Info</div></a>
+                <label class="btn btn-secondary left-15"><input type="radio" name="options"><a href="{{url_for('user_history') }}">History</a></label>
+            </div>
+            <div style="display: inline">
+                <div class="right-80">
+                    <br>
+                    {% if request.endpoint == 'account' %}
+                        {% include '/account/account_info.html' %}
+                    {% endif %}
+                    {% if request.endpoint == 'user_history' %}
+                        {% include '/account/account_history.html' %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user.css') }}">
+{% endblock body %}

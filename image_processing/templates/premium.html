@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block title %}
+<div class="container">
+    <h1 class="display-4" style="text-align: center; font-size: 45px">Image Processing Tool</h1>
+</div>
+{% endblock title %}
+
+{% block body %}
+<div id="inline">
+    <div class="btn-group-vertical" role="group">
+        <br>
+        <a href="{{url_for('crop') }}" class="left-15"><button class="btn btn-outline-secondary left-15" id="crop" type="button">Crop Images</button></a>
+        <a href="{{url_for('resize') }}" class="left-15"><button class="btn btn-outline-secondary left-15" id="resize">Resize Images</button></a>
+        <a href="{{url_for('filter') }}" class="left-15"><button class="btn btn-outline-secondary left-15" id="filter">Image Filters</button></a>
+        <a href="{{ url_for('home') }}" class="left-15"><button class="btn btn-outline-secondary left-15">Back</button></a>
+        <br>
+    </div>
+    <div style="display: inline">
+        {% if request.endpoint == 'crop' or request.endpoint == 'home' %}  
+        <div class="right-80">
+            <br>
+            {% include '/function/crop.html' %}
+        </div>
+
+        {% elif request.endpoint == 'resize' %}
+        <div class="right-80">
+            <br>
+            {% include '/function/resize.html' %}
+            <br>
+        </div>
+
+        {% elif request.endpoint == 'filter' %}
+        <div class="right-80">
+            <br>
+            {% include '/function/filter.html' %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+    
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user.css') }}">
+
+<script>
+    var path = window.location.pathname.substring(1);
+    var e = document.getElementsByClassName("btn-outline-secondary");
+    for(i=0; i<e.length; i++) {
+        e[i].classList.remove('active');
+    }
+    document.getElementById(path).classList.add('active');
+</script>
+{% endblock body %}
+

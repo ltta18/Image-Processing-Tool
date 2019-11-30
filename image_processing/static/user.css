@@ -1,0 +1,30 @@
+.right-80 {
+    display: block;
+    width: 85%;
+    float: right;
+    background-color:#ecf2f9;
+}
+
+.left-15 {
+    width: 100%;
+    background-color: #d8e5f3;
+    border: none;
+    text-align: left;
+
+}
+
+a, .left-15{
+    color: #444444;
+}
+
+a:hover{
+    color: whitesmoke;
+}
+
+#inline {
+    display: inline-block;
+    width: 100%;
+    background-color: #d8e5f3;
+    border-radius: 5px;
+}
+

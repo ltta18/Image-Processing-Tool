@@ -1,0 +1,76 @@
+<form action="" method="POST" enctype="multipart/form-data">
+    <!-- Content -->
+    <div class="container" id="action">
+        <div class="row">
+            <div class="col-md-9">
+                <!-- <h3>Demo:</h3> -->
+                <div class="img-container">
+                    <img src="/static/images/cropped_rainbow.jpg" alt="Picture">
+                </div>
+            </div>
+            <div class="col-md-3" style="padding-top:10%">
+                <!-- <h3>Data:</h3> -->
+                <div class="docs-data">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-prepend">
+                            <label class="input-group-text" for="dataX">X</label>
+                        </span>
+                        <input type="text" class="form-control" id="dataX" name="dataX" placeholder="x">
+                        <span class="input-group-append">
+                            <span class="input-group-text">px</span>
+                        </span>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-prepend">
+                            <label class="input-group-text" for="dataY">Y</label>
+                        </span>
+                        <input type="text" class="form-control" id="dataY" name="dataY" placeholder="y">
+                        <span class="input-group-append">
+                            <span class="input-group-text">px</span>
+                        </span>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-prepend">
+                            <label class="input-group-text" for="dataWidth">Width</label>
+                        </span>
+                        <input type="text" class="form-control" id="dataWidth" name="dataWidth" placeholder="width">
+                        <span class="input-group-append">
+                            <span class="input-group-text">px</span>
+                        </span>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-prepend">
+                            <label class="input-group-text" for="dataHeight">Height</label>
+                        </span>
+                        <input type="text" class="form-control" id="dataHeight" name="dataHeight" placeholder="height">
+                        <span class="input-group-append">
+                            <span class="input-group-text">px</span>
+                        </span>
+                    </div>  
+                    <br>
+
+                    <!--Import file-->
+                    <div class="input-group input-group-sm">
+                        <div class="custom-file">
+                            <label class="custom-file-label" for="inputGroupFile01" style="overflow: hidden">Choose file</label>
+                            <input type="file" class="custom-file-input" id="inputGroupFile01" name="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                        </div>
+                    </div>
+                    <br>
+                    <input class="btn btn-outline-secondary" type="submit" value="Submit">
+                </div>
+            </div>
+        </div>
+
+        <div class="row" id="actions">
+            <div class="col-md-9 docs-buttons">
+            </div>
+        </div>
+    </div>  
+</form>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='cropper.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='main1.css') }}">
+
+
+

@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h3 class="text-muted" style="text-align: center">Welcome! Please choose 1 option from the list below.</h3>
+    <br><br>
+    <div class="btn-group" style="left: 50%; margin-right: -50%; position: absolute; transform: translate(-50%, -50%)" role="group" aria-label="Basic example">
+        {% if not current_user.is_authenticated %}
+        <a role="button" class="btn btn-dark" style="color:aliceblue" data-toggle="tooltip" data-placement="bottom" data-html="true"
+        title="<a href='{{ url_for('login') }}'><u>Sign in</u></a> to unlock this feature.">Resize Images 🔒</a>
+        <a role="button" class="btn btn-dark" style="color:aliceblue" data-toggle="tooltip" data-placement="top" data-html="true"
+        title="<a href='{{ url_for('login') }}'><u>Sign in</u></a> to unlock this feature.">Crop Images 🔒</a>
+        {% else %}
+        <a role="button" class="btn btn-secondary" href="{{ url_for('resize') }}">Resize Images</a>
+        <a role="button" class="btn btn-secondary" href="{{ url_for('crop') }}">Crop Images</a>
+        {% endif %}
+        <a role="button" class="btn btn-dark" style="color:aliceblue" data-toggle="tooltip" data-placement="bottom" data-html="true"
+        title="<a href='{{ url_for('get_premium') }}'><u>Upgrade to premium</u></a> to unlock this feature.">Image Filters 🔒</a>
+    </div>
+
+{% endblock content %}
+{% block body %}
+<div class="jumbotron jumbotron-fluid">
+    <div style="width: 90%; margin-left: 5%;">
+        <a href="{{ url_for('crop') }}"><h2 class="text-muted" id="back" style="text-align: center">Welcome! Let's get started.</h2></a>
+    </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user.css') }}">
+{% endblock body %}
